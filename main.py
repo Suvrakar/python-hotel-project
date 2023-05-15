@@ -12,6 +12,7 @@ Note:   any user input/output should be done using the appropriate functions in 
 # This will be used to store the data read from the source data file.
 # TODO: Your code here
 import tui
+import csv
 
 
 def run():
@@ -20,7 +21,6 @@ def run():
     # TODO: Your code here
     tui.welcome()
 
-    
     # Task 13: Load the data.
     # - Use the appropriate function in the module 'tui' to display a message to indicate that the data loading
     # operation has started.
@@ -28,13 +28,45 @@ def run():
     # You should appropriately handle the case where the file cannot be found or loaded.
     # - Use the appropriate functions in the module 'tui' to display a message to indicate how many reviews have
     # been loaded and that the data loading operation has completed.
-    
+
     # TODO: Your code here
+    filename = 'data/hotel_reviews.csv'
+    reviews_data = []
+
+
+    # Open the CSV file and read its contents
+    with open(filename, 'r', newline='') as file:
+     csv_reader = csv.reader(file)
+
+    tui.progress("loading",0)
+
+    try:
+        with open(filename, 'r', newline='') as file:
+            csv_reader = csv.reader(file)
+
+            # Read the header row
+            header = next(csv_reader, None)
+
+            # Iterate over each row in the CSV file
+            for i, row in enumerate(csv_reader):
+                reviews_data.append(row)
+                progress = (i + 1) / 500 * 100  # Calculate the progress percentage
+                tui.progress("Data Loading", int(progress))  # Update progress message
+                
+            
+    except FileNotFoundError:
+        print("Error: File not found.")
+
+    except Exception as e:
+        print("Error: Failed to load data from file.")
+        print(f"Exception: {str(e)}")
+
 
     while True:
         # Task 14: Using the appropriate function in the module 'tui', display the main menu
         # Assign the value returned from calling the function to a suitable local variable
         # TODO: Your code here
+        main_menu_choice = tui.main_menu()
 
         # Task 15: Check if the user selected the option for processing data.  If so, then do the following:
         # - Use the appropriate function in the module tui to display a message to indicate that the data processing
@@ -82,6 +114,12 @@ def run():
         #       - Use the appropriate function in the module 'tui' to indicate that the summary
         #       process has completed.
         # TODO: Your code here
+        
+
+
+
+
+
 
         # Task 21: Check if the user selected the option for visualising data.
         # If so, then do the following:
@@ -93,7 +131,7 @@ def run():
         # - Use the appropriate function in the module 'tui' to display a message to indicate that the
         # data visualisation operation has completed.
         # TODO: Your code here
-        
+
         # Task 25: Check if the user selected the option for exporting reviews.  If so, then do the following:
         # - Use the appropriate function in the module 'tui' to retrieve what reviews are to be exported.
         # - Check what option has been selected

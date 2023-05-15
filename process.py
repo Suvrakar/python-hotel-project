@@ -24,3 +24,89 @@ The required functions are as follows:
 """
 
 # TODO: Your code here
+
+
+from typing import List
+from tui import hotel_name, review_dates
+
+
+def get_total_reviews(reviews: List[List[str]]) -> int:
+    """
+    Task 16: Retrieve the total number of reviews that have been loaded.
+
+    :param reviews: A list of reviews
+    :return: The total number of reviews
+    """
+    return len(reviews)
+
+
+def get_reviews_by_hotel(reviews: List[List[str]]) -> List[List[str]]:
+    """
+    Task 17: Retrieve the reviews for a hotel where the hotel name is specified by the user.
+
+    :param reviews: A list of reviews
+    :return: The reviews for the specified hotel
+    """
+    hotel_name = hotel_name()
+    return [review for review in reviews if review[1] == hotel_name]
+
+
+def get_reviews_by_dates(reviews: List[List[str]]) -> List[List[str]]:
+    """
+    Task 18: Retrieve the reviews for the dates specified by the user.
+
+    :param reviews: A list of reviews
+    :return: The reviews for the specified dates
+    """
+    review_dates = review_dates()
+    return [review for review in reviews if review[0] in review_dates]
+
+
+def group_reviews_by_nationality(reviews: List[List[str]]) -> dict:
+    """
+    Task 19: Retrieve all the reviews grouped by the reviewer's nationality.
+
+    :param reviews: A list of reviews
+    :return: A dictionary where the keys are nationalities and the values are lists of reviews for each nationality
+    """
+    grouped_reviews = {}
+    for review in reviews:
+        nationality = review[2]
+        if nationality in grouped_reviews:
+            grouped_reviews[nationality].append(review)
+        else:
+            grouped_reviews[nationality] = [review]
+    return grouped_reviews
+
+
+def summarize_reviews(reviews: List[List[str]]) -> List[dict]:
+    """
+    Task 20: Retrieve a summary of all the reviews.
+
+    :param reviews: A list of reviews
+    :return: A list of dictionaries containing the summary information for each date
+    """
+    summary = []
+    dates = set(review[0] for review in reviews)
+    for date in sorted(dates):
+        positive_reviews = 0
+        negative_reviews = 0
+        total_rating = 0
+        num_reviews = 0
+        for review in reviews:
+            if review[0] == date:
+                rating = float(review[5])
+                total_rating += rating
+                num_reviews += 1
+                if rating >= 3.0:
+                    positive_reviews += 1
+                else:
+                    negative_reviews += 1
+        average_rating = total_rating / num_reviews if num_reviews > 0 else 0
+        summary.append({
+            'date': date,
+            'positive_reviews': positive_reviews,
+            'negative_reviews': negative_reviews,
+            'average_rating': average_rating
+        })
+    return summary

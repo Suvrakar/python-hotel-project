@@ -38,7 +38,6 @@ def error(msg):
     # TODO: Your code here
     error_message = f'Error! {msg}.'
     print(error_message)
-    pass  # can remove
 
 
 def progress(operation, value):
@@ -60,7 +59,15 @@ def progress(operation, value):
     :return: does not return anything
     """
     # TODO: Your code here
-    pass  # can remove
+    if value == 0:
+        status = 'initiated'
+    elif 0 < value < 100:
+        status = f'in progress ({value}% completed)'
+    else:
+        status = 'completed'
+
+    message = f'Operation: {operation} [{status}].'
+    print(message)
 
 
 def main_menu():
@@ -181,6 +188,7 @@ def hotel_name():
     # TODO: Your code here
     hotel = input("Enter the name of the hotel: ")
     return hotel
+
 
 def review_dates():
     """
