@@ -19,13 +19,9 @@ def welcome():
 
     :return: Does not return anything.
     """
-    title = "Hotel Reviews"
-    num_of_asterisks = len(title)
-
-    print("*" * (num_of_asterisks + 4))
-    print("*", title, "*")
-    print("*" * (num_of_asterisks + 4))
-
+    title = 'Hotel Reviews'
+    asterisks = '*' * len(title)
+    print(f'{asterisks} {title} {asterisks}')
 
 
 def error(msg):
@@ -40,7 +36,9 @@ def error(msg):
     :return: does not return anything
     """
     # TODO: Your code here
-    pass # can remove
+    error_message = f'Error! {msg}.'
+    print(error_message)
+    pass  # can remove
 
 
 def progress(operation, value):
@@ -62,7 +60,7 @@ def progress(operation, value):
     :return: does not return anything
     """
     # TODO: Your code here
-    pass # can remove
+    pass  # can remove
 
 
 def main_menu():
@@ -97,7 +95,6 @@ def main_menu():
             print("Invalid option. Please try again.\n")
 
 
-
 def sub_menu(variant=0):
     """
     Task 5: Display a sub menu of options and read the user's response.
@@ -127,24 +124,49 @@ def sub_menu(variant=0):
     :return: 0 if invalid selection otherwise an integer for a valid selection
     """
     # TODO: Your code here
-    pass # can remove
+    if not variant or variant == 0:
+        error("Invalid variant. Please provide a valid variant.")
+        return 0
+
+    if variant == 1:
+        print("[1] Reviews for Hotel")
+        print("[2] Reviews for Dates")
+        print("[3] Reviews for Nationality")
+        print("[4] Reviews Summary")
+    elif variant == 2:
+        print("[1] Positive/Negative Pie Chart")
+        print("[2] Reviews Per Nationality Chart")
+        print("[3] Animated Summary")
+    elif variant == 3:
+        print("[1] All Reviews")
+        print("[2] Reviews for Specific Hotel")
+    else:
+        error("Invalid variant. Please provide a valid variant.")
+        return 0
+
+    try:
+        option = int(input("Enter your choice: "))
+        return option
+    except ValueError:
+        error("Invalid input. Please enter a valid option.")
+        return 0
 
 
 def total_reviews(num_reviews):
     f"""
     Task 6: Display the total number of reviews in the data set.
-    
+
     The function should display a message in the following format:
 
-    "There are {num_reviews} reviews in the data set."
+    # "There are {num_reviews} reviews in the data set."
 
-    Where {num_reviews} is the value of the parameter passed to this function
-    
+    # Where {num_reviews} is the value of the parameter passed to this function
+
     :param num_reviews: the total number of reviews in the data set
     :return: Does not return anything
     """
     # TODO: Your code here
-    pass # can remove
+    print(f"There are {num_reviews} reviews in the data set.")
 
 
 def hotel_name():
@@ -157,8 +179,8 @@ def hotel_name():
     :return: the name of a hotel
     """
     # TODO: Your code here
-    pass # can remove
-
+    hotel = input("Enter the name of the hotel: ")
+    return hotel
 
 def review_dates():
     """
@@ -175,7 +197,9 @@ def review_dates():
     :return: a list of review dates
     """
     # TODO: Your code here
-    pass # can remove
+    dates = input("Enter review dates (mm/dd/yyyy) separated by spaces: ")
+    dates_list = dates.split()
+    return dates_list
 
 
 def display_review(review, cols=None):
@@ -188,7 +212,7 @@ def display_review(review, cols=None):
     [Note: in the above example, the ... is an ellipsis and is only included here as the text is long]
 
     The parameter cols is a list of column indexes e.g. [0,3,5]
-    
+
     The function should display a list of values.
     The displayed list should only consist of those values whose column index is in cols.
 
@@ -206,13 +230,17 @@ def display_review(review, cols=None):
     :return: Does not return anything
     """
     # TODO: Your code here
-    pass # can remove
+    if cols is None or len(cols) == 0:
+        print(review)
+    else:
+        display_values = [review[i] for i in cols]
+        print(display_values)
 
 
-def display_reviews():
+def display_reviews(reviews, cols=None):
     """
     Task 10: Display each review in the specified list of reviews.
-    
+
     This function will display more than one review.
     Only the data for the specified column indexes will be displayed.
     If no column indexes have been specified, then all the data for a review will be displayed.
@@ -229,7 +257,7 @@ def display_reviews():
 
     Each review should be displayed as a list of values 
     e.g. ["08/03/2017", "Hotel Arena", "Russia", "I am so angry...", "Only the park...", 2.9,	7, "[' Leisure trip ', ' Couple ', ' Duplex Double Room ', ' Stayed 6 nights ']", "0 days"]
-    
+
     Only the columns whose indexes are included in cols should be displayed for each review.
 
     If cols is an empty list or None then all values for the review should be displayed.
@@ -239,4 +267,5 @@ def display_reviews():
     :return: Does not return anything
     """
     # TODO: Your code here
-    pass # can remove
+    for review in reviews:
+        display_review(review, cols)
