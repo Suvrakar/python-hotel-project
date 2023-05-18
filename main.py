@@ -39,7 +39,7 @@ def run():
         with open(filename, 'r', newline='') as file:
          csv_reader = csv.reader(file)
 
-        # tui.progress("loading",0)
+        tui.progress("loading",0)
 
         try:
             with open(filename, 'r', newline='') as file:
@@ -83,11 +83,29 @@ def run():
             tui.progress("Stared",0)
             print("You have choose 1")
             read_csv()
+            tui.sub_menu(choice)
             return choice
-
-
-
-
+        
+        elif choice == 2:
+            tui.progress("Stared",0)
+            print("You have choose 2")
+            read_csv()
+            tui.sub_menu(choice)
+            return choice
+        
+        elif choice == 3:
+            tui.progress("Stared",0)
+            print("You have choose 3")
+            read_csv()
+            tui.sub_menu(choice)
+            return choice
+        
+        elif choice == 4:
+            tui.progress("Stared",0)
+            print("You have choose 4")
+            read_csv()
+            tui.sub_menu(choice)
+            return choice
 
         # To process the data, do the following:
         # - Use the appropriate function in the module 'tui' to display a sub-menu of options for processing the data
