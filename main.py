@@ -38,7 +38,7 @@ def run():
     with open(filename, 'r', newline='') as file:
      csv_reader = csv.reader(file)
 
-    tui.progress("loading",0)
+    # tui.progress("loading",0)
 
     try:
         with open(filename, 'r', newline='') as file:
@@ -51,7 +51,7 @@ def run():
             for i, row in enumerate(csv_reader):
                 reviews_data.append(row)
                 progress = (i + 1) / 500 * 100  # Calculate the progress percentage
-                tui.progress("Data Loading", int(progress))  # Update progress message
+                # tui.progress("Data Loading", int(progress))  # Update progress message
                 
             
     except FileNotFoundError:
@@ -67,6 +67,9 @@ def run():
         # Assign the value returned from calling the function to a suitable local variable
         # TODO: Your code here
         main_menu_choice = tui.main_menu()
+        # print(main_menu_choice)
+        choice = int(main_menu_choice)
+   
 
         # Task 15: Check if the user selected the option for processing data.  If so, then do the following:
         # - Use the appropriate function in the module tui to display a message to indicate that the data processing
