@@ -30,36 +30,37 @@ def run():
     # been loaded and that the data loading operation has completed.
 
     # TODO: Your code here
+
     filename = 'data/hotel_reviews.csv'
     reviews_data = []
 
-
-    # Open the CSV file and read its contents
-    with open(filename, 'r', newline='') as file:
-     csv_reader = csv.reader(file)
-
-    # tui.progress("loading",0)
-
-    try:
+    def read_csv():
+        # Open the CSV file and read its contents
         with open(filename, 'r', newline='') as file:
-            csv_reader = csv.reader(file)
+         csv_reader = csv.reader(file)
 
-            # Read the header row
-            header = next(csv_reader, None)
+        # tui.progress("loading",0)
 
-            # Iterate over each row in the CSV file
-            for i, row in enumerate(csv_reader):
-                reviews_data.append(row)
-                progress = (i + 1) / 500 * 100  # Calculate the progress percentage
-                # tui.progress("Data Loading", int(progress))  # Update progress message
+        try:
+            with open(filename, 'r', newline='') as file:
+                csv_reader = csv.reader(file)
+
+                # Read the header row
+                header = next(csv_reader, None)
+
+                # Iterate over each row in the CSV file
+                for i, row in enumerate(csv_reader):
+                    reviews_data.append(row)
+                    progress = (i + 1) / 500 * 100  # Calculate the progress percentage
+                    tui.progress("Data Loading", int(progress))  # Update progress message
+                    
                 
-            
-    except FileNotFoundError:
-        print("Error: File not found.")
+        except FileNotFoundError:
+            print("Error: File not found.")
 
-    except Exception as e:
-        print("Error: Failed to load data from file.")
-        print(f"Exception: {str(e)}")
+        except Exception as e:
+            print("Error: Failed to load data from file.")
+            print(f"Exception: {str(e)}")
 
 
     while True:
@@ -77,7 +78,17 @@ def run():
         # - Process the data (see below).
         # - Use the appropriate function in the module tui to display a message to indicate that the data processing
         # operation has completed.
-        #
+        
+        if choice == 1:
+            tui.progress("Stared",0)
+            print("You have choose 1")
+            read_csv()
+            return choice
+
+
+
+
+
         # To process the data, do the following:
         # - Use the appropriate function in the module 'tui' to display a sub-menu of options for processing the data
         # (menu variant 1).

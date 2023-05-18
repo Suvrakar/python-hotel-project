@@ -87,7 +87,6 @@ def main_menu():
 
     :return: an integer for a valid selection
     """
-    welcome()
 
     while True:
         print("[1] Process Data")
