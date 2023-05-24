@@ -6,7 +6,7 @@ A function may also need to format and/or structure a response e.g. return a lis
 Any errors or invalid inputs should be handled appropriately.
 Please note that you do not need to read the data file or perform any other such processing in this module.
 """
-
+import process
 
 def welcome():
     """
@@ -139,6 +139,30 @@ def sub_menu(variant=0):
         print("[2] Reviews for Dates")
         print("[3] Reviews for Nationality")
         print("[4] Reviews Summary")
+        option = int(input("Enter your choice: "))
+
+        if option == 1:
+        # Code for handling option 1: Reviews for Hotel
+            process.get_total_reviews()
+            print("Reviews for Hotel")
+
+        elif option == 2:
+        # Code for handling option 2: Reviews for Dates
+            print("Reviews for Dates")
+
+        elif option == 3:
+        # Code for handling option 3: Reviews for Nationality
+            print("Reviews for Nationality")
+
+        elif option == 4:
+        # Code for handling option 4: Reviews Summary
+            print("Reviews Summary")
+
+        else:
+            print("Invalid option")
+
+        return option
+    
     elif variant == 2:
         print("[1] Positive/Negative Pie Chart")
         print("[2] Reviews Per Nationality Chart")
@@ -153,6 +177,7 @@ def sub_menu(variant=0):
     try:
         option = int(input("Enter your choice: "))
         return option
+    
     except ValueError:
         error("Invalid input. Please enter a valid option.")
         return 0
