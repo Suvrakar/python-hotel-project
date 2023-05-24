@@ -28,7 +28,11 @@ The required functions are as follows:
 
 from typing import List
 from tui import hotel_name, review_dates
+from main import read_csv
+import csv
 
+filename = 'data/hotel_reviews.csv'
+reviews_data = []
 
 def get_total_reviews(reviews: List[List[str]]) -> int:
     """
@@ -37,6 +41,21 @@ def get_total_reviews(reviews: List[List[str]]) -> int:
     :param reviews: A list of reviews
     :return: The total number of reviews
     """
+    read_csv()
+    total_reviews_index = read_csv.header.index('Total_Reviews_By_Reviewer')
+    total_reviews_sum = 0
+
+    # Iterate over each row in the CSV file
+    for i, row in enumerate(read_csv.csv_reader):
+        # Add the value from the "Total_Reviews_By_Reviewer" column to the sum
+        total_reviews_sum += int(row[total_reviews_index])
+
+        # Append the entire row to the reviews_data list
+        reviews_data.append(row)
+
+        # Print the total sum of the "Total_Reviews_By_Reviewer" column
+        print("Total reviews:", total_reviews_sum)
+
     return len(reviews)
 
 

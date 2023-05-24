@@ -15,6 +15,32 @@ import tui
 import csv
 
 
+filename = 'data/hotel_reviews.csv'
+reviews_data = []
+
+def read_csv():
+       # Open the CSV file and read its contents
+    with open(filename, 'r', newline='') as file:
+            csv_reader = csv.reader(file)
+
+    try:
+        with open(filename, 'r', newline='') as file:
+            csv_reader = csv.reader(file)
+            header = next(csv_reader, None)
+
+                # Iterate over each row in the CSV file
+        for i, row in enumerate(csv_reader):
+                    reviews_data.append(row)
+
+
+    except FileNotFoundError:
+        print("Error: File not found.")
+
+    except Exception as e:
+        print("Error: Failed to load data from file.")
+        print(f"Exception: {str(e)}")
+
+
 def run():
     # Task 12: Call the function welcome of the module 'tui'.
     # This will display our welcome message when the program is executed.
@@ -37,9 +63,9 @@ def run():
     def read_csv():
         # Open the CSV file and read its contents
         with open(filename, 'r', newline='') as file:
-         csv_reader = csv.reader(file)
+            csv_reader = csv.reader(file)
 
-        tui.progress("loading",0)
+        tui.progress("loading", 0)
 
         try:
             with open(filename, 'r', newline='') as file:
@@ -51,17 +77,17 @@ def run():
                 # Iterate over each row in the CSV file
                 for i, row in enumerate(csv_reader):
                     reviews_data.append(row)
-                    progress = (i + 1) / 500 * 100  # Calculate the progress percentage
-                    tui.progress("Data Loading", int(progress))  # Update progress message
-                    
-                
+                    # Calculate the progress percentage
+                    progress = (i + 1) / 500 * 100
+                    # Update progress message
+                    tui.progress("Data Loading", int(progress))
+
         except FileNotFoundError:
             print("Error: File not found.")
 
         except Exception as e:
             print("Error: Failed to load data from file.")
             print(f"Exception: {str(e)}")
-
 
     while True:
         # Task 14: Using the appropriate function in the module 'tui', display the main menu
@@ -70,7 +96,6 @@ def run():
         main_menu_choice = tui.main_menu()
         # print(main_menu_choice)
         choice = int(main_menu_choice)
-   
 
         # Task 15: Check if the user selected the option for processing data.  If so, then do the following:
         # - Use the appropriate function in the module tui to display a message to indicate that the data processing
@@ -78,30 +103,30 @@ def run():
         # - Process the data (see below).
         # - Use the appropriate function in the module tui to display a message to indicate that the data processing
         # operation has completed.
-        
+
         if choice == 1:
-            tui.progress("Stared",0)
+            tui.progress("Stared", 0)
             print("You have choose 1")
             read_csv()
             tui.sub_menu(choice)
             return choice
-        
+
         elif choice == 2:
-            tui.progress("Stared",0)
+            tui.progress("Stared", 0)
             print("You have choose 2")
             read_csv()
             tui.sub_menu(choice)
             return choice
-        
+
         elif choice == 3:
-            tui.progress("Stared",0)
+            tui.progress("Stared", 0)
             print("You have choose 3")
             read_csv()
             tui.sub_menu(choice)
             return choice
-        
+
         elif choice == 4:
-            tui.progress("Stared",0)
+            tui.progress("Stared", 0)
             print("You have choose 4")
             read_csv()
             tui.sub_menu(choice)
@@ -146,12 +171,6 @@ def run():
         #       - Use the appropriate function in the module 'tui' to indicate that the summary
         #       process has completed.
         # TODO: Your code here
-        
-
-
-
-
-
 
         # Task 21: Check if the user selected the option for visualising data.
         # If so, then do the following:
